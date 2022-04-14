@@ -5,10 +5,12 @@ import { AppRoute } from "../../const";
 
 const Archive = ()=>{
     return(
-        <>
-        <Header mode={AppRoute.ARCHIVE}/>
-        <Board mode={AppRoute.ARCHIVE}/>
-        </>
+        <main className="main">
+            <Header mode={AppRoute.ARCHIVE}/>
+            <section className="main__wrapper">
+                <Board mode={AppRoute.ARCHIVE}/>
+            </section>
+        </main>
     )
 }
 export default Archive

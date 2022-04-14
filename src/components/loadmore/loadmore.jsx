@@ -1,7 +1,7 @@
 import React from "react"
 
 const LoadMore = ()=>{
-    return(
+    return (
         <button className="load-more" type="button">Загрузить еще</button>
     )
 }

@@ -6,13 +6,13 @@ import { AppRoute } from "../../const";
 
 const Main =() =>{
     return(
-        <>
-            <Header mode = {AppRoute.MAIN}/>
+        <main className="main">
+            <Header mode = {AppRoute.NOEVENTS}/>
             <section className="main__wrapper">
-                <Filter/>
-                <Board/>
+                <Filter mode = {AppRoute.NOEVENTS}/>
+                <Board mode = {AppRoute.NOEVENTS}/>
             </section>
-        </>
+        </main>
     )
 }
 export default Main

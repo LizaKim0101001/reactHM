@@ -1,7 +1,14 @@
 import React from "react";
 import CreateBtn from "../create/createbtn";
+import { AppRoute } from "../../const";
 
-const Filter = () =>{
+const Filter = ({mode}) =>{
+  let showCreateBtn;
+  if (mode === AppRoute.MAIN || mode === AppRoute.NOEVENTS) {
+    showCreateBtn = true;
+  } else if (mode === AppRoute.EVENT) {
+    showCreateBtn = false;
+  }
     return(
         <section className="main__filter filter">
           <input
@@ -52,7 +59,7 @@ const Filter = () =>{
           <label htmlFor="filter__favorite" className="filter__label"
             >Избранное <span className="filter__favorite-count count">1</span></label
           >
-          <CreateBtn/>
+          <CreateBtn show = {showCreateBtn}/>
         </section>
     )
 }
