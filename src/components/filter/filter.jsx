@@ -1,4 +1,5 @@
 import React from "react";
+import CreateBtn from "../create/createbtn";
 
 const Filter = () =>{
     return(
@@ -51,10 +52,7 @@ const Filter = () =>{
           <label htmlFor="filter__favorite" className="filter__label"
             >Избранное <span className="filter__favorite-count count">1</span></label
           >
-          <button
-            name="control"
-            className="btn-add"
-          >Создать</button>
+          <CreateBtn/>
         </section>
     )
 }

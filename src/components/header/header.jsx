@@ -1,15 +1,18 @@
-import React from "react";
+import React from "react"
+import { AppRoute } from "../../const"
 
-const Header = ()=>{
-    <section className="main__header">
+const Header = ({mode}) => {
+    return (
+      <section className="main__header">
         <section className="main__header-wrap">
-            <span className="main__header-logo">SomeList</span>
-            <div className="main__header-group-lnk">
-                <a href="#" className="main__header-lnk lnk-active">События</a>
-                <a href="#" className="main__header-lnk">Архив</a>
-            </div>
+          <span className="main__header-logo">SomeList</span>
+          <div className="main__header-group-lnk">
+            <a href="1" className={`main__header-lnk ${mode === AppRoute.MAIN && 'lnk-active'}`}>События</a>
+            <a href="1" className={`main__header-lnk ${mode === AppRoute.ARCHIVE && 'lnk-active'}`}>Архив</a>
+          </div>
         </section>
-    </section>
-};
+      </section>
+    )
+  }
 
-export default Header;
+  export default Header
