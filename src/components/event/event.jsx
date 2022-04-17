@@ -1,12 +1,12 @@
 import React from "react"
 import Btns from "../button/button"
+import { useParams } from "react-router-dom"
 
-const Event = ({par})=>{
-    
+const Event = ()=>{
+    const {id} = useParams()
     const Title = ()=>{
-       return par? `Редактирование событий` : `Добавление события`;
+       return id? `Редактирование событий` : `Добавление события`;
     }
-    console.log();
     return(
         <form className="board__form">
             <h2 className="board__title">{Title()}</h2>

@@ -3,5 +3,6 @@ export const AppRoute = {
     ARCHIVE: "/archive",
     ADD: "/event",
     EVENT: "/event/:id?",
-    NOEVENTS: "no-events",
 }
+//для корректного отобрадения board с карточками нужно добавить main /:id, 
+//но в таком случае кнопка "События перестает корректно отоюражаться"
