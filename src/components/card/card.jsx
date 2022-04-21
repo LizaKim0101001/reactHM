@@ -1,18 +1,23 @@
 import React from "react";
 import moment from "moment"
 import "moment/locale/ru";
-import "./card.css"
+import "./card.css";
+import { Link } from "react-router-dom";
+import { AppRoute } from "../../const";
 
-const Card = ({ theme, comment, date, favorite})=>{
+const Card = ({ theme, comment, date, favorite, _id})=>{
+  const newLink = `${AppRoute.ADD}/${_id}`
   let formatDate = moment(date).format("DD MMMM")
     return(
         <article className="card">
         <div className="card__form">
           <div className="card__inner">
             <div className="card__control">
-              <button type="button" className="card__btn card__btn--edit">
-                Редактировать
-              </button>
+              <Link to={newLink} className="card__btn card__btn--edit">
+                <button type="button"className="card__btn card__btn--edit" >
+                  Редактировать
+                </button>
+              </Link>
               <button type="button" className="card__btn card__btn--archive">
                 В архив
               </button>
