@@ -17,7 +17,7 @@ const App = ({events})=> {
           <Archive events={events}/>
         </Route>
         <Route path={AppRoute.EVENT}>
-          <Form/>
+          <Form events={events}/>
         </Route>
         <Route>
           <Errors></Errors>
