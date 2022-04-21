@@ -1,15 +1,11 @@
 import React from "react"
-import Btns from "../button/button"
 import { useParams } from "react-router-dom"
 
 const Event = ()=>{
     const {id} = useParams()
-    const Title = ()=>{
-       return id? `Редактирование событий` : `Добавление события`;
-    }
     return(
         <form className="board__form">
-            <h2 className="board__title">{Title()}</h2>
+            <h2 className="board__title">{(id? `Редактирование событий` : `Добавление события`)}</h2>
             <fieldset className="board__field board__field--theme">
             <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
             <textarea
@@ -36,7 +32,10 @@ const Event = ()=>{
                 name="date"
             />
             </fieldset>
-            <Btns/>
+            <div className="btns">
+              <button type="submit" className="btn-submit">{id? `Сохранить`:`Добавить`}</button>
+              <button type="reset" className="btn-reset">Очистить</button>
+            </div>
         </form>
     )
 }

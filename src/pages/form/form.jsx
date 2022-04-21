@@ -5,15 +5,15 @@ import Filter from "../../components/filter/filter";
 
 const Form = ()=>{
     return(
-        <main className="main">
-            <Header/>
-            <section className="main__wrapper">
-                <Filter/>
-                <section className="board">
-                    <Event />
-                </section>
+    <>
+        <Header />
+        <section className="main__wrapper">
+            <Filter />
+            <section className="board">
+                <Event />
             </section>
-        </main>
+        </section>
+    </>
     )
 }
 export default Form

@@ -3,22 +3,22 @@ import Card from "../card/card";
 import Sorting from "../sorting/sorting";
 import LoadMore from "../loadmore/loadmore";
 import { AppRoute } from "../../const";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 
-const Board = ()=>{
+const Board = ({events})=>{
     const {pathname} = useLocation()
-    const {id} = useParams()
-    return id?(
+    return (
         <section className="board">
-            <Sorting/>
-            <div className={`board__events ${pathname === AppRoute.ARCHIVE && 'board__events--archive'}`}>
-                <Card/>
-            </div>
-            <LoadMore/>
-        </section>
-    ):(
-        <section className="board">
-            <div className="board__no-events">Нет ни одного события. Нажмите "Создать"</div>
+            {(events.length>0)
+            ? (<> 
+                {(pathname === AppRoute.MAIN) && <Sorting />}                
+                <div className={`board__events ${pathname === AppRoute.ARCHIVE && 'board__events--archive'}`}>
+                    {events.map(event => <Card {...event} key={event._id} />)}
+                </div>
+                <LoadMore />
+                </>) 
+            : <div className="board__no-events">Нет ни одного события. Нажмите "Создать"</div>
+        }   
         </section>
     )
 }

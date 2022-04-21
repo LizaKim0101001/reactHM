@@ -1,16 +1,7 @@
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
-import { AppRoute } from "../../const";
 
 const Sorting = () =>{
-  const {path} = useRouteMatch()
-  let show;
-  if (path === AppRoute.MAIN) {
-    show = true;
-  } else {
-    show = false;
-  }
-    return show?(
+    return (
          <div className="board__filter-list">
             <span className="board__filter--title">Сортировка:</span>
             <input
@@ -36,6 +27,6 @@ const Sorting = () =>{
             />
             <label htmlFor="board__filter-old" className="board__filter-label">Сначала старые</label>
           </div>
-    ):null;
+    )
 }
 export default Sorting;

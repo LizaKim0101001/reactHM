@@ -6,12 +6,16 @@ import Archive from "../../pages/archive/archive"
 import Form from "../../pages/form/form";
 import Errors from "../../pages/404/404";
 
-const App = ()=> {
+const App = ({events})=> {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={AppRoute.MAIN} exact component={Main}/>
-        <Route path={AppRoute.ARCHIVE} exact component={Archive}/>
+        <Route path={AppRoute.MAIN} exact> 
+          <Main events={events}/>
+        </Route>
+        <Route path={AppRoute.ARCHIVE} exact> 
+          <Archive events={events}/>
+        </Route>
         <Route path={AppRoute.EVENT}>
           <Form/>
         </Route>
