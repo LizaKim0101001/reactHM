@@ -1,7 +1,7 @@
 import React from "react";
 
-const Sorting = ({show}) =>{
-    return show?(
+const Sorting = () =>{
+    return (
          <div className="board__filter-list">
             <span className="board__filter--title">Сортировка:</span>
             <input
@@ -27,6 +27,6 @@ const Sorting = ({show}) =>{
             />
             <label htmlFor="board__filter-old" className="board__filter-label">Сначала старые</label>
           </div>
-    ):null;
+    )
 }
 export default Sorting;

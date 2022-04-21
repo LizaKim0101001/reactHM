@@ -1,14 +1,10 @@
 import React from "react";
-import CreateBtn from "../create/createbtn";
+import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
+import { useRouteMatch } from "react-router-dom";
 
-const Filter = ({mode}) =>{
-  let showCreateBtn;
-  if (mode === AppRoute.MAIN || mode === AppRoute.NOEVENTS) {
-    showCreateBtn = true;
-  } else if (mode === AppRoute.EVENT) {
-    showCreateBtn = false;
-  }
+const Filter = () =>{
+  const {path} = useRouteMatch()
     return(
         <section className="main__filter filter">
           <input
@@ -59,7 +55,14 @@ const Filter = ({mode}) =>{
           <label htmlFor="filter__favorite" className="filter__label"
             >Избранное <span className="filter__favorite-count count">1</span></label
           >
-          <CreateBtn show = {showCreateBtn}/>
+          {(path === AppRoute.MAIN) 
+          && <Link to={AppRoute.ADD}>
+              <button
+                  name="control"
+                  className="btn-add">
+                  Создать
+              </button>
+            </Link> }
         </section>
     )
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../../components/header/header";
 import Board from "../../components/board/board";
-import { AppRoute } from "../../const";
 
-const Archive = ()=>{
+const Archive = ({events})=>{
+    const archiveEvents = events.filter(x => x.archive)
     return(
-        <main className="main">
-            <Header mode={AppRoute.ARCHIVE}/>
+        <>
+            <Header/>
             <section className="main__wrapper">
-                <Board mode={AppRoute.ARCHIVE}/>
+                <Board events={archiveEvents}/>
             </section>
-        </main>
+        </>
     )
 }
 export default Archive
