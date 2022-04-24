@@ -6,18 +6,18 @@ import Archive from "../../pages/archive/archive"
 import Form from "../../pages/form/form";
 import Errors from "../../pages/404/404";
 
-const App = ({events})=> {
+const App = ()=> {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.MAIN} exact> 
-          <Main events={events}/>
+          <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact> 
-          <Archive events={events}/>
+          <Archive/>
         </Route>
         <Route path={AppRoute.EVENT}>
-          <Form/>
+          <Form />
         </Route>
         <Route>
           <Errors></Errors>
