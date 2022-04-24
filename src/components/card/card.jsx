@@ -4,31 +4,76 @@ import "moment/locale/ru";
 import "./card.css";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
+import { events } from "../../store/index";
 
-const Card = ({ theme, comment, date, favorite, _id})=>{
-  const newLink = `${AppRoute.ADD}/${_id}`
+const Card = ({ theme, comment, date, favorite, _id, archive})=>{
   let formatDate = moment(date).format("DD MMMM")
+
+  const handleDelete =(evt)=>{
+    evt.preventDefault();
+    events.deleteEvent(_id)
+  }
+
+  const handleToArchive = (evt)=>{
+    evt.preventDefault();
+    events.editEvent({
+      id: _id,
+      theme,
+      comment,
+      favorite,
+      date,
+      archive: !archive,
+    })
+  }
+
+  const handleToFavorite = (evt)=>{
+    evt.preventDefault();
+    events.editEvent({
+      id: _id,
+      theme,
+      comment,
+      date,
+      archive,
+      favorite: !favorite,
+    })
+  }
+
+  const handleToEdit = ()=>{
+
+  }
+
     return(
         <article className="card">
         <div className="card__form">
           <div className="card__inner">
             <div className="card__control">
-              <Link to={newLink} className="card__btn card__btn--edit">
-                <button type="button"className="card__btn card__btn--edit" >
+              <Link to={`${AppRoute.ADD}/${_id}`} className="card__btn card__btn--edit">
+                <button 
+                type="button"className="card__btn card__btn--edit" 
+                onClick={handleToEdit}
+                >
                   Редактировать
                 </button>
               </Link>
-              <button type="button" className="card__btn card__btn--archive">
+              <button 
+              type="button" 
+              className="card__btn card__btn--archive"
+              onClick={handleToArchive}
+              >
                 В архив
               </button>
               <button
                 type="button"
-                className={`card__btn card__btn--favorites ${favorite && 'favorite-on'}`}>
+                className={`card__btn card__btn--favorites ${favorite && 'favorite-on'}`}
+                onClick={handleToFavorite}
+              >
                 В избранное
               </button>
               <button
                 type="button"
-                className="card__btn card__btn--remove">
+                className="card__btn card__btn--remove"
+                onClick={handleDelete}
+              >
                 Удалить
               </button>
             </div>

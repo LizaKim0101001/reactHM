@@ -1,17 +1,41 @@
 import React from "react"
-import moment from "moment";
 import { useParams } from "react-router-dom";
-const Event = ({events})=>{
+import { events } from "../../store/index";
+import moment from "moment";
+import {useState} from "react";
+
+const Event = ()=>{
     const {id} = useParams()
     let formatDate = new Date();
-    let event ={}
+    let eventEdit ={}
     if (id) {
-        event = events.find(event => event._id === id)
-        formatDate = `${moment(event.date).format("YYYY-MM-DDTHH:mm")}`
+        eventEdit = events.data.find(event => event._id === id)
+        formatDate = `${moment(eventEdit.date).format("YYYY-MM-DDTHH:mm")}`
+    }
+
+    const [form, setForm] = useState({
+        id,
+        theme: '',
+        comment: '',
+        date: new Date(),
+    })
+
+    const handleAddEvent = (evt)=>{
+        const {name, value} = evt.target
+        setForm({...form, [name]:value})
+    }
+
+    const handleSubmit = (evt)=>{
+        evt.preventDefault();
+        if (id) {
+            events.editEvent(form)
+        } else {
+            events.addEvent(form)
+        }
     }
     return(
-        <form className="board__form">
-            <h2 className="board__title">{(event._id? `Редактирование событий` : `Добавление события`)}</h2>
+        <form className="board__form" onSubmit = {handleSubmit}>
+            <h2 className="board__title">{(id? `Редактирование событий` : `Добавление события`)}</h2>
             <fieldset className="board__field board__field--theme">
             <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
             <textarea
@@ -19,7 +43,8 @@ const Event = ({events})=>{
                 className="board__input board__input--theme"
                 name="theme"
                 required
-                defaultValue={event.theme}
+                defaultValue={eventEdit.theme}
+                onChange = {handleAddEvent}
             ></textarea>
             </fieldset>
             <fieldset className="board__field board__field--comment">
@@ -29,7 +54,8 @@ const Event = ({events})=>{
                 className="board__input board__input--comment"
                 name="comment"
                 required
-                defaultValue={event.comment}
+                defaultValue={eventEdit.comment}
+                onChange = {handleAddEvent}
             ></textarea>
             </fieldset>
             <fieldset className="board__field board__field--date">
@@ -39,10 +65,11 @@ const Event = ({events})=>{
                 className="board__input board__input--date"
                 name="date"
                 defaultValue={formatDate}
+                onChange = {handleAddEvent}
             />
             </fieldset>
             <div className="btns">
-              <button type="submit" className="btn-submit">{event._id? `Сохранить`:`Добавить`}</button>
+              <button type="submit" className="btn-submit">{id? `Сохранить`:`Добавить`}</button>
               <button type="reset" className="btn-reset">Очистить</button>
             </div>
         </form>

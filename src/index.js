@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import App from './components/app/app';
-import { events } from './mocks';
+//import { events } from './mocks';
 
 const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<App events = {events} />);
+const root = createRoot(container);
+root.render(<App />);
