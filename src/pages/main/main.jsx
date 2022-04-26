@@ -6,13 +6,13 @@ import {observer} from "mobx-react-lite"
 import { events } from "../../store";
 
 const Main = observer(() =>{
-    const {notArchiveData} = events
+    const {filteredData} = events
     return(
         <>
             <Header/>
             <section className="main__wrapper">
                 <Filter/>
-                <Board event={notArchiveData}/>
+                <Board event={filteredData}/>
             </section>
         </>
     )

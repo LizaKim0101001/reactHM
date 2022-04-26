@@ -40,3 +40,7 @@ export const editEvent = (data)=>{
 export const deleteArchive = ()=>{
     return request(`${url}/archive/delete`, 'DELETE')
 }
+
+export const getEvent = (id)=>{
+    return request(`${url}/${id}`)
+}

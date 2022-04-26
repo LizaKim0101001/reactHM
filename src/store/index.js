@@ -1,29 +1,11 @@
 import {  makeAutoObservable, onBecomeObserved } from "mobx";
-import {getEvents, addEvent, editEvent, deleteEvent, deleteArchive} from "../api"
-
-class EventStore {
-    _id;
-    theme = "";
-    comment = "";
-    date = new Date();
-    archive = false;
-    favorite = false;
-
-    constructor ({ _id, theme, comment, date, archive, favorite}){
-       makeAutoObservable (this, {}, {
-           autoBind: true,
-       })
-       this._id = _id;
-       this.theme = theme;
-       this.comment = comment;
-       this.date = date;
-       this.archive = archive;
-       this.favorite = favorite;
-    }
-}
+import {getEvents, addEvent, editEvent, deleteEvent, deleteArchive, getEvent} from "../api"
+import moment from "moment";
 
 class EventsStore {
     data = [];
+    filteredData = []
+    oneEvent ={}
     constructor(){
         makeAutoObservable(this, {},{
             autoBind: true,
@@ -32,16 +14,31 @@ class EventsStore {
         onBecomeObserved(this, 'data', this.fetch)
     }
     get archiveData() {
-        return this.data.map(event => new EventStore(event)).filter(x => x.archive)
+        return this.data.filter(event=>event.archive)
       }
     
     get notArchiveData() {
-        return this.data.map(event => new EventStore(event)).filter(x => !x.archive)
+        return this.data.filter(event=>!event.archive)
       }
+    get beforeDate(){
+        return this.data
+        .filter(event=> moment(event.date).isBefore(moment(), 'day') && !event.archive);
+    }
+    get todayDate(){
+        return this.data
+        .filter(event=> moment(event.date).isSame(moment(), "day") && !event.archive)
+    }
+    get afterDate(){
+        return this.data.filter(event=> moment(event.date).isAfter(moment(), "day") && !event.archive)
+    }
+    get favoriteData(){
+        return this.data.filter(event=> event.favorite && !event.archive)
+    }
 
     *fetch() {
         const response = yield getEvents();
-        this.data = response.map(event => new EventStore(event));
+        this.data = response;
+        this.filteredData = response.filter(event=>!event.archive);
       }
     *addEvent(data) {
         yield addEvent(data)
@@ -60,6 +57,10 @@ class EventsStore {
     *deleteArchive(){
         yield deleteArchive()
         yield this.fetch()
+    }
+    *getEvent(id){
+        const response = yield getEvent(id)
+        this.oneEvent = response;
     }
 }
 

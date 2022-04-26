@@ -1,18 +1,15 @@
 import React from "react"
-import { useParams } from "react-router-dom";
 import { events } from "../../store/index";
 import moment from "moment";
 import {useState} from "react";
+import { useParams } from "react-router-dom";
 
-const Event = ()=>{
+const Event =  ()=>{
     const {id} = useParams()
-    let formatDate = new Date();
-    let eventEdit ={}
-    if (id) {
-        eventEdit = events.data.find(event => event._id === id)
-        formatDate = `${moment(eventEdit.date).format("YYYY-MM-DDTHH:mm")}`
-    }
-
+    let formatDate = new Date()
+    events.getEvent(id)
+    const {date, comment, theme} = events.oneEvent
+    formatDate = `${moment(date).format("YYYY-MM-DDTHH:mm")}`
     const [form, setForm] = useState({
         id,
         theme: '',
@@ -29,8 +26,10 @@ const Event = ()=>{
         evt.preventDefault();
         if (id) {
             events.editEvent(form)
+
         } else {
             events.addEvent(form)
+
         }
     }
     return(
@@ -43,7 +42,7 @@ const Event = ()=>{
                 className="board__input board__input--theme"
                 name="theme"
                 required
-                defaultValue={eventEdit.theme}
+                defaultValue={theme}
                 onChange = {handleAddEvent}
             ></textarea>
             </fieldset>
@@ -54,7 +53,7 @@ const Event = ()=>{
                 className="board__input board__input--comment"
                 name="comment"
                 required
-                defaultValue={eventEdit.comment}
+                defaultValue={comment}
                 onChange = {handleAddEvent}
             ></textarea>
             </fieldset>

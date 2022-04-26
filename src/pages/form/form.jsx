@@ -2,9 +2,8 @@ import React from "react";
 import Header from "../../components/header/header"
 import Event from "../../components/event/event";
 import Filter from "../../components/filter/filter";
-import { observer } from "mobx-react-lite";
 
-const Form = observer(()=>{
+const Form = ()=>{
     return(
     <>
         <Header />
@@ -16,5 +15,5 @@ const Form = observer(()=>{
         </section>
     </>
     )
-})
+}
 export default Form
