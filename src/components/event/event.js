@@ -3,8 +3,9 @@ import { events } from "../../store/index";
 import moment from "moment";
 import {useState} from "react";
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-const Event =  ()=>{
+const Event =  observer(()=>{
     const {id} = useParams()
     let formatDate = new Date()
     events.getEvent(id)
@@ -73,6 +74,6 @@ const Event =  ()=>{
             </div>
         </form>
     )
-}
+})
 
 export default Event
