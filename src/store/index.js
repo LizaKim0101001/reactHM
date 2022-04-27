@@ -35,6 +35,31 @@ class EventsStore {
         return this.data.filter(event=> event.favorite && !event.archive)
     }
 
+    get firstNew(){
+        const firstNew = this.filteredData.filter(event=>!event.archive)
+        return firstNew.sort(function (a, b) {
+          if (a.date < b.date) {
+            return 1
+          }
+          if (a.date > b.date) {
+            return -1
+          } 
+          return 0
+        })
+    }
+    get firstOld(){
+        const firstOld = this.filteredData.filter(event=>!event.archive)
+        return firstOld.sort(function (a, b) {
+          if (a.date > b.date) {
+            return 1
+          }
+          if (a.date < b.date) {
+            return -1
+          } 
+          return 0
+        })
+    }
+
     *fetch() {
         const response = yield getEvents();
         this.data = response;
